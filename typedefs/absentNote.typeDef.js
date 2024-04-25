@@ -2,6 +2,7 @@ const absentNoteTypeDef = `#graphql
     type AbsentNote {
         _id: String!
         clientId: ID!
+        inspectionId: ID!
         start_date: String!
         end_date: String!
         reason: String!
@@ -22,6 +23,7 @@ const absentNoteTypeDef = `#graphql
         start_date: String!
         end_date: String!
         reason: String!
+        inspectionId: ID!
     }
   
 `;

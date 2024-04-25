@@ -7,6 +7,11 @@ const AbsentNoteSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    inspectionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Inspection",
+    },
     start_date: {
       type: String,
       required: true,
