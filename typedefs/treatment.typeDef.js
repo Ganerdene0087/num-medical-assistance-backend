@@ -11,7 +11,7 @@ const treatmentTypeDef = `#graphql
     type Query {
         treatments: [Treatment!]
         treatmentByInspection(inspectionId: ID!): Treatment
-        treatmentBtClient(clientId: ID!): Treatment
+        treatmentByClient(clientId: ID!): Treatment
     }
 
     type Mutation {
