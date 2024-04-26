@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     firstName: {
       type: String,
       required: true,
@@ -40,10 +44,12 @@ const userSchema = new mongoose.Schema(
     gender: {
       type: String,
       enum: ["male", "female"],
+      required: true,
     },
     role: {
       type: String,
       enum: ["doctor", "nurse", "client"],
+      required: true,
     },
   },
   {

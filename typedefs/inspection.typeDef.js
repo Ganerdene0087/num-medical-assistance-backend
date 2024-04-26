@@ -2,7 +2,7 @@ const inspectionTypeDef = `#graphql
     type Inspection {
         _id: ID!
         cliendId: ID!
-        appointmentId: ID!
+        date: String!
         diagnosis: String!
         prescription: [String]
     }
@@ -20,7 +20,7 @@ const inspectionTypeDef = `#graphql
 
     input CreateInspectionInput {
         cliendId: ID!
-        appointmentId: ID!
+        date: String!
         diagnosis: String!
         prescription: [String]
     } 
@@ -28,7 +28,7 @@ const inspectionTypeDef = `#graphql
     input UpdateInspectionInput {
         _id: ID!
         cliendId: ID!
-        appointmentId: ID!
+        date: String!
         diagnosis: String!
         prescription: [String]
     }

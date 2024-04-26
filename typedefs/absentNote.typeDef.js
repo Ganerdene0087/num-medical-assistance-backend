@@ -1,6 +1,6 @@
 const absentNoteTypeDef = `#graphql
     type AbsentNote {
-        _id: String!
+        _id: ID!
         clientId: ID!
         inspectionId: ID!
         start_date: String!

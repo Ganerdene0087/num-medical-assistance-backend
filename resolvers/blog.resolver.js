@@ -37,7 +37,7 @@ const blogResolver = {
     },
     updateBlog: async (_, { input }) => {
       try {
-        const updatedBlog = await Blog.findByIdAndUpdate(input.blogId, input, {
+        const updatedBlog = await Blog.findByIdAndUpdate(input._id, input, {
           new: true,
         });
         return updatedBlog;

@@ -7,10 +7,9 @@ const InspectionSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
-    appointmentId: {
-      type: mongoose.Schema.Types.ObjectId,
+    date: {
+      type: String,
       required: true,
-      ref: "Appointment",
     },
     diagnosis: {
       type: String,

@@ -5,10 +5,10 @@ const userTypeDef = `#graphql
         password: String!
         firstName: String!
         lastName: String!
-        address: String!
+        address: String
         phone: Int!
         registerNumber: String!
-        sisiId: String!
+        sisiId: String
         age: Int!
         gender: String!
         role: String!

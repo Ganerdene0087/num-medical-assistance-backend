@@ -15,6 +15,7 @@ const TreatmentSchema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
+      enum: ["sudas", "bulchin", "boolt", "UVCH", "Solux", "Bumba"],
     },
     frequency: {
       type: Number,

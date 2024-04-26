@@ -1,6 +1,6 @@
 const blogTypeDef = `#graphql
     type Blog {
-        _id: String!
+        _id: ID!
         authorId: ID!
         date: String!
         title: String!
@@ -28,7 +28,7 @@ const blogTypeDef = `#graphql
     }
 
     input UpdateBlogInput {
-        blogId: String!
+        _id: ID!
         authorId: ID!
         date: String!
         title: String!
