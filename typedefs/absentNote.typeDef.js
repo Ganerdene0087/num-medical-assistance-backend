@@ -10,7 +10,8 @@ const absentNoteTypeDef = `#graphql
 
     type Query {
         absentNotes: [AbsentNote!]
-        absentNotesByClient(clientId: ID!): [AbsentNote!]
+        absentNotesByInspection(inspectionId: ID!): [AbsentNote!]
+        absentNote(absentNoteId: ID!): AbsentNote
     }
 
     type Mutation {

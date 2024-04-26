@@ -46,7 +46,7 @@ const inspectionResolver = {
     updateInspection: async (_, { input }) => {
       try {
         const updatedInspection = await Inspection.findByIdAndUpdate(
-          input.id,
+          input._id,
           input,
           {
             new: true,
@@ -54,8 +54,8 @@ const inspectionResolver = {
         );
         return updatedInspection;
       } catch (err) {
-        console.error("Error creating inspection: ", err);
-        throw new Error("Үзлэгийн цаг шинэчлэхэд алдаа гарлаа");
+        console.error("Error updating inspection: ", err);
+        throw new Error("Үзлэг шинэчлэхэд алдаа гарлаа");
       }
     },
     deleteInspection: async (_, { inspecionId }) => {
