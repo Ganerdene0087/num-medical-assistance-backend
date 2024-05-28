@@ -2,23 +2,6 @@ import AbsentNote from "../models/absentNote.model.js";
 
 const absentNoteResolver = {
   Query: {
-    absentNotes: async (_, __, context) => {
-      try {
-        if (!context.getUser()) throw new Error("Unauthorized");
-        const userId = await context.getUser()._id;
-        const userRole = await context.getUser().role;
-
-        const absentNotes =
-          userRole === "client"
-            ? await AbsentNote.find({ clientId: userId })
-            : await AbsentNote.find({});
-
-        return absentNotes;
-      } catch (err) {
-        console.error("Error getting absents: ", err);
-        throw new Error("Өгөгдөл дуудахад алдаа гарлаа");
-      }
-    },
     absentNote: async (_, { absentNoteId }) => {
       try {
         const absentNote = await AbsentNote.findById(absentNoteId);
@@ -28,10 +11,22 @@ const absentNoteResolver = {
         throw new Error("Өгөгдөл дуудахад алдаа гарлаа");
       }
     },
-    absentNotesByInspection: async (_, inspectionId) => {
+    absentNoteByInspection: async (_, { inspectionId }) => {
       try {
         const absentNote = await AbsentNote.find({
           inspectionId: inspectionId,
+        });
+        return absentNote;
+      } catch (err) {
+        console.error("Error getting absentNote: ", err);
+        throw new Error("Өгөгдөл дуудахад алдаа гарлаа");
+      }
+    },
+
+    absentNoteByClient: async (_, { clientId }) => {
+      try {
+        const absentNote = await AbsentNote.find({
+          clientId: clientId,
         });
         return absentNote;
       } catch (err) {
@@ -45,7 +40,6 @@ const absentNoteResolver = {
       try {
         const newAbsentNote = new AbsentNote({
           ...input,
-          clientId: context.getUser()._id,
         });
         await newAbsentNote.save();
         return newAbsentNote;
@@ -61,8 +55,8 @@ const absentNoteResolver = {
         );
         return deletedAbsentNote;
       } catch (err) {
-        console.error("Error deleting inspection: ", err);
-        throw new Error("Эмчилгээ устгахад алдаа гарлаа");
+        console.error("Error deleting absentNote: ", err);
+        throw new Error("Акт устгахад алдаа гарлаа");
       }
     },
   },

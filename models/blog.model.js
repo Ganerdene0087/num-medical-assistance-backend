@@ -7,10 +7,7 @@ const BlogSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
-    date: {
-      type: String,
-      required: true,
-    },
+
     title: {
       type: String,
       required: true,

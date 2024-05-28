@@ -2,10 +2,10 @@ const blogTypeDef = `#graphql
     type Blog {
         _id: ID!
         authorId: ID!
-        date: String!
         title: String!
         content: String!
         thumb: String!
+        createdAt: String!
     }
 
     type Query {
@@ -20,8 +20,6 @@ const blogTypeDef = `#graphql
     }
 
     input CreateBlogInput {
-        authorId: ID!
-        date: String!
         title: String!
         content: String!
         thumb: String!
@@ -29,8 +27,6 @@ const blogTypeDef = `#graphql
 
     input UpdateBlogInput {
         _id: ID!
-        authorId: ID!
-        date: String!
         title: String!
         content: String!
         thumb: String!

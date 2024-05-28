@@ -1,17 +1,18 @@
 const treatmentTypeDef = `#graphql
     type Treatment {
         _id: ID!
-        cliendId: ID!
+        clientId: ID!
         inspectionId: ID!
         type: String!
         frequency: Int!
-
+        isDone: Boolean
     }
 
     type Query {
         treatments: [Treatment!]
-        treatmentByInspection(inspectionId: ID!): [Treatment!]
+        treatmentsByInspection(inspectionId: ID!): [Treatment!]
         treatment(treatmentId: ID!): Treatment
+        treatmentsByIsDone(isDone: Boolean!): [Treatment!]  
     }
 
     type Mutation {
@@ -21,18 +22,19 @@ const treatmentTypeDef = `#graphql
     }
 
     input CreateTreatmentInput {
-        cliendId: ID!
         inspectionId: ID!
+        clientId: ID!
         type: String!
-        frequence: Int!
+        frequency: Int!
     } 
 
     input UpdateTreatmentInput{
         _id: ID!
-        cliendId: ID!
+        clientId: ID!
         inspectionId: ID!
         type: String!
         frequency: Int!
+        isDone: Boolean
     }
 
   

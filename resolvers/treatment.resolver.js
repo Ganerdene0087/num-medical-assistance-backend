@@ -28,9 +28,26 @@ const treatmentResolver = {
         throw new Error("Өгөгдөл дуудахад алдаа гарлаа");
       }
     },
-    treatmentByInspection: async (_, inspectionId) => {
+    treatmentsByInspection: async (_, { inspectionId }) => {
       try {
         const treatments = await Treatment.find({ inspectionId: inspectionId });
+        return treatments;
+      } catch (err) {
+        console.error("Error getting treatments: ", err);
+        throw new Error("Өгөгдөл дуудахад алдаа гарлаа");
+      }
+    },
+    treatmentsByIsDone: async (_, { isDone }, context) => {
+      try {
+        if (!context.getUser()) throw new Error("Unauthorized");
+        const userId = await context.getUser()._id;
+        const userRole = await context.getUser().role;
+
+        const treatments =
+          userRole === "client"
+            ? await Treatment.find({ clientId: userId, isDone: isDone })
+            : await Treatment.find({ isDone: isDone });
+
         return treatments;
       } catch (err) {
         console.error("Error getting treatments: ", err);
@@ -43,7 +60,7 @@ const treatmentResolver = {
       try {
         const newTreatment = new Treatment({
           ...input,
-          clientId: context.getUser()._id,
+          isDone: false,
         });
         await newTreatment.save();
         return newTreatment;
@@ -52,6 +69,7 @@ const treatmentResolver = {
         throw new Error("Эмчилгээ үүсгэхэд алдаа гарлаа");
       }
     },
+
     updateTreatment: async (_, { input }) => {
       try {
         const updatedTreatment = await Treatment.findByIdAndUpdate(

@@ -4,7 +4,7 @@ const blogResolver = {
   Query: {
     blogs: async () => {
       try {
-        const blogs = await Blog.find({});
+        const blogs = await Blog.find({}).exec();
         return blogs;
       } catch (err) {
         console.error("Error getting blogs: ", err);

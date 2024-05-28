@@ -16,7 +16,7 @@ const InspectionSchema = new mongoose.Schema(
       required: true,
     },
     prescription: {
-      type: [String],
+      type: String,
     },
   },
   {

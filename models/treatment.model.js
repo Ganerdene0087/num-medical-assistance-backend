@@ -21,6 +21,10 @@ const TreatmentSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    isDone: {
+      type: Boolean,
+      required: false,
+    },
   },
   {
     timestamps: true,

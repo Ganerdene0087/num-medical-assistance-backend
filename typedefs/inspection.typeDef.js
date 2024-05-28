@@ -1,15 +1,17 @@
 const inspectionTypeDef = `#graphql
     type Inspection {
         _id: ID!
-        cliendId: ID!
+        clientId: ID!
         date: String!
         diagnosis: String!
-        prescription: [String]
+        prescription: String
     }
 
     type Query {
         inspections: [Inspection!]
         inspection(inspectionId: ID!): Inspection
+        upcomingInspections(date: String!): [Inspection!]!
+        pastInspections(date: String!): [Inspection!]!
     }
 
     type Mutation {
@@ -19,18 +21,16 @@ const inspectionTypeDef = `#graphql
     }
 
     input CreateInspectionInput {
-        cliendId: ID!
         date: String!
         diagnosis: String!
-        prescription: [String]
+        prescription: String!
     } 
      
     input UpdateInspectionInput {
         _id: ID!
-        cliendId: ID!
         date: String!
         diagnosis: String!
-        prescription: [String]
+        prescription: String
     }
   
 `;

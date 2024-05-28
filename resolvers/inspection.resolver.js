@@ -21,11 +21,45 @@ const inspectionResolver = {
     },
     inspection: async (_, { inspectionId }) => {
       try {
-        const inspecion = await Inspection.findById(inspectionId);
-        return inspecion;
+        const inspection = await Inspection.findById(inspectionId);
+        return inspection;
       } catch (err) {
         console.error("Error getting inspection: ", err);
         throw new Error("Өгөгдөл дуудахад алдаа гарлаа");
+      }
+    },
+    upcomingInspections: async (_, { date }, context) => {
+      try {
+        if (!context.getUser()) throw new Error("Unauthorized");
+        const userId = await context.getUser()._id;
+        const userRole = await context.getUser().role;
+
+        const upcomingInspections =
+          userRole === "client"
+            ? await Inspection.find({ clientId: userId, date: { $gte: date } })
+            : await Inspection.find({ date: { $gte: date } }).sort({ date: 1 });
+
+        return upcomingInspections;
+      } catch (err) {
+        console.error("Error getting upcoming inspections: ", err);
+        throw new Error("Failed to get upcoming inspections");
+      }
+    },
+    pastInspections: async (_, { date }, context) => {
+      try {
+        if (!context.getUser()) throw new Error("Unauthorized");
+        const userId = await context.getUser()._id;
+        const userRole = await context.getUser().role;
+
+        const pastInspections =
+          userRole === "client"
+            ? await Inspection.find({ clientId: userId, date: { $lt: date } })
+            : await Inspection.find({ date: { $lt: date } }).sort({ date: 1 });
+
+        return pastInspections;
+      } catch (err) {
+        console.error("Error getting past inspections: ", err);
+        throw new Error("Failed to get past inspections");
       }
     },
   },
@@ -41,6 +75,7 @@ const inspectionResolver = {
       } catch (err) {
         console.error("Error creating inspection: ", err);
         throw new Error("Үзлэгийн цаг захиалахад алдаа гарлаа");
+        throw new Error(err);
       }
     },
     updateInspection: async (_, { input }) => {
