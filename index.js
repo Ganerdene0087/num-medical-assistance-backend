@@ -62,7 +62,7 @@ await server.start();
 app.use(
   "/graphql",
   cors({
-    origin: "https://num-medical-assistance.vercel.app/",
+    origin: "http://localhost:3000/",
     credentials: true,
   }),
   express.json(),
